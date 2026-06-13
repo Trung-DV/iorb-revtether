@@ -1,0 +1,15 @@
+# iPhone USB reverse tether (OrbStack)
+# 1. Plug in + Trust  2. orb usb attach <id>  3. docker compose up -d --build
+
+services:
+  sharing:
+    image: ghcr.io/trung-dv/iorb-revtether:latest
+    build: .
+    container_name: ios-shared
+    privileged: true
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+    environment:
+      VERBOSE: 1   # set to "1" for DHCP/DNS logs, stats, tcpdump
